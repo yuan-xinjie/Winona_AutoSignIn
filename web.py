@@ -1,3 +1,4 @@
+import time
 import requests
 from get_web_token import get_web_token
 from config import read_token_file
@@ -41,6 +42,18 @@ def mobile_web_signin_action():
             return msg1, pass_push
         else:
             return res1, fail_push
+    elif code == 703:
+        for i in range(0,3):
+            # 操作频繁，等待10s重新签到
+            time.sleep(10)
+            res2 = mobile_web_signin(web_url, web_headers, web_data)
+            msg2 = res2[0]
+            code2 = res2[1]
+            if msg2 == "成功":
+                return msg2, pass_push
+            else:
+                pass
+        return res2, fail_push
     # 600代表token失效，需重新登录获取新的token
     elif code == 600:
         # 获取新token
@@ -62,8 +75,12 @@ def mobile_web_signin_action():
         code2 = res2[1]
         if msg2 == "成功":
             print("移动网页端签到成功")
-            return msg2, pass_push, new_token
+            return msg2, pass_push
         else:
             return res2, fail_push
     else:
         return res, fail_push
+
+if __name__ == "__main__":
+    a = mobile_web_signin_action()
+    print(a)
