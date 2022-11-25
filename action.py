@@ -1,25 +1,28 @@
 import datetime
+import time
 
 from zgxcx import xcx_signin
 zgxcx = xcx_signin()
 zglog = f"{str(datetime.datetime.now())}  专柜小程序开始签到： {zgxcx[0]}"
 print(zglog)
 
-# time.sleep(1)
 
-from web import mobile_web_signin_action
-web = mobile_web_signin_action()
-weblog = f"{str(datetime.datetime.now())}  移动网页端开始签到： {web[0]}"
-print(weblog)
-
-# time.sleep(3)
+# time.sleep(20)
 
 from gfxcx import gfxcx_signin
 gfxcx = gfxcx_signin()
 gfxcxlog = f"{str(datetime.datetime.now())}  官方小程序开始签到： {gfxcx[0]}"
 print(gfxcxlog)
 
-# time.sleep(1)
+# time.sleep(20)
+
+from web import mobile_web_signin_action
+web = mobile_web_signin_action()
+weblog = f"{str(datetime.datetime.now())}  移动网页端开始签到： {web[0]}"
+print(weblog)
+
+
+# time.sleep(5)
 
 from qmApp import qm_signin
 qm = qm_signin()
